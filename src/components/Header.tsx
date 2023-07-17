@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Header = () => {
   return (
@@ -15,9 +16,14 @@ const Header = () => {
               fill="white"
             ></path>
           </svg>
-          <div className="border-b border-gray w-full py-2 text-lg ">
+          <motion.div
+            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+            initial={{ y: -250 }}
+            animate={{ y: -10 }}
+            className="border-b border-gray w-full py-2 text-lg "
+          >
             <span>Pizza Joint</span>
-          </div>
+          </motion.div>
         </div>
       </Link>
     </div>

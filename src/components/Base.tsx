@@ -1,5 +1,30 @@
 //rrd
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: {
+    x: "100vw",
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      delay: 0.5,
+    },
+  },
+};
+const nextVariants = {
+  hidden: {
+    x: "-100vw",
+  },
+  visible: {
+    x: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
 
 const Base = ({ store, bases }) => {
   const { selectedBase, setSelectedBase } = store;
@@ -7,36 +32,53 @@ const Base = ({ store, bases }) => {
     setSelectedBase(base);
   };
   return (
-    <div className="flex flex-col m-auto justify-center items-center h-96 gap-3">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex flex-col m-auto justify-center items-center h-96 gap-3"
+    >
       <div className="border-b border-gray text-white py-3">
         <h2>Step 1: Choose Your Base</h2>
       </div>
       <div>
         <ul className="flex flex-col gap-2">
           {bases.map((base) => {
-            const isActive = selectedBase === base;
             return (
-              <li key={base} onClick={() => handleBaseClick(base)}>
-                <span
-                  className={`cursor-pointer ${
-                    isActive ? "text-active" : "text-white"
-                  }`}
+              <motion.li
+                whileHover={{ scale: 1.3, originX: 0 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                key={base}
+                onClick={() => handleBaseClick(base)}
+              >
+                <motion.span
+                  whileHover={{ color: "#fe8112" }}
+                  className="cursor-pointer"
                 >
                   {base}
-                </span>
-              </li>
+                </motion.span>
+              </motion.li>
             );
           })}
         </ul>
       </div>
       {selectedBase && (
-        <div className="btn">
-          <Link to="/topping">
+        <Link to="/topping">
+          {" "}
+          <motion.div
+            className="btn"
+            whileHover={{
+              scale: 1.1,
+              textShadow: "0px 0px 8px rgb(255,,255,255)",
+              boxShadow: "0px 0px 8px rgb(255,,255,255)",
+            }}
+            variants={nextVariants}
+          >
             <span>Next</span>
-          </Link>
-        </div>
+          </motion.div>
+        </Link>
       )}
-    </div>
+    </motion.div>
   );
 };
 
