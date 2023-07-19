@@ -1,16 +1,15 @@
 //rrd
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useStore } from "./store";
 //components
 import Base from "./components/Base";
 import Home from "./components/Home";
 import Order from "./components/Order";
 import Topping from "./components/Topping";
 import Main from "./layouts/Main";
+import { useStore } from "./store";
 
 function App() {
   const store = useStore();
-
   const bases = ["Classic", "Thin & Crispy", "Thick Crust"];
 
   const toppings = [
@@ -40,13 +39,7 @@ function App() {
         },
         {
           path: "/order",
-          element: (
-            <Order
-              store={store}
-              selectedTopping={store.selectedTopping}
-              toppings={toppings}
-            />
-          ),
+          element: <Order store={store} toppings={toppings} />,
         },
       ],
     },

@@ -8,6 +8,8 @@ export default {
       grey: "#C5C5C5",
       white: "#FFFF",
       active: "#FFA500",
+      black: "#000000",
+      back: "radial-gradient(var(--tw-gradient-stops))",
     },
 
     extend: {

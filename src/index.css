@@ -2,7 +2,7 @@
 @tailwind base;
 @layer base {
   body {
-    @apply bg-indigo p-10 font-quicksand;
+    @apply bg-indigo font-quicksand;
   }
   h1 {
     @apply text-3xl text-white;

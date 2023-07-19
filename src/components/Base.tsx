@@ -1,8 +1,17 @@
 //rrd
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+//library
+import { motion, Variants } from "framer-motion";
 
-const containerVariants = {
+interface IBase {
+  store: {
+    selectedBase: string;
+    setSelectedBase: (base: string) => void;
+  };
+  bases: string[];
+}
+
+const containerVariants: Variants = {
   hidden: {
     x: "100vw",
     opacity: 0,
@@ -16,17 +25,20 @@ const containerVariants = {
     },
   },
 };
-const nextVariants = {
-  hidden: {
-    x: "-100vw",
-  },
-  visible: {
-    x: 0,
-    transition: { type: "spring", stiffness: 100 },
+
+const buttonVariants: Variants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,,255,255)",
+    transition: {
+      repeatType: "reverse",
+      duration: 0.6,
+      repeat: Infinity,
+    },
   },
 };
-
-const Base = ({ store, bases }) => {
+const Base = ({ store, bases }: IBase) => {
   const { selectedBase, setSelectedBase } = store;
   const handleBaseClick = (base: string) => {
     setSelectedBase(base);
@@ -67,12 +79,8 @@ const Base = ({ store, bases }) => {
           {" "}
           <motion.div
             className="btn"
-            whileHover={{
-              scale: 1.1,
-              textShadow: "0px 0px 8px rgb(255,,255,255)",
-              boxShadow: "0px 0px 8px rgb(255,,255,255)",
-            }}
-            variants={nextVariants}
+            whileHover="hover"
+            variants={buttonVariants}
           >
             <span>Next</span>
           </motion.div>
